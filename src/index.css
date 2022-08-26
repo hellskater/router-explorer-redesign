@@ -8,7 +8,47 @@
     font-family: "Roboto", "sans-serif", -apple-system, BlinkMacSystemFont,
       "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol";
-    overflow: hidden;
     letter-spacing: 1px;
+  }
+
+  /* body {
+    background-image: url("./assets/wrapper.png");
+    background-size: 100% 100%;
+    overflow: hidden;
+  } */
+}
+
+@layer components {
+  .bg-glass {
+    @apply bg-white bg-opacity-10 backdrop-blur-lg bg-clip-padding backdrop-filter shadow-lg;
+  }
+
+  .text-gradient {
+    @apply font-bold bg-gradient-to-r from-[#ff505a] to-[#f08868] bg-clip-text text-transparent;
+  }
+
+  .moving-gradient {
+    background: linear-gradient(
+      -45deg,
+      #f08868,
+      #c21500,
+      #ff505a,
+      #ffc500,
+      orange
+    );
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 }
