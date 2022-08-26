@@ -12,7 +12,7 @@ const CrossChainSwap = () => {
         {isSuccess &&
           !isLoading &&
           data.map(({ label, value }) => (
-            <StatCard label={label} value={value} />
+            <StatCard key={label} label={label} value={value} />
           ))}
       </section>
     </div>

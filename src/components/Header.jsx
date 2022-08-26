@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import RouterFullLogo from "../assets/full-logo.svg";
 import RouterLogo from "../assets/logo.svg";
 import useScrollPosition from "../hooks/useScrollPosition";
@@ -15,7 +16,7 @@ const navLinks = [
     path: "/crosstalk",
   },
   {
-    name: "Fee Calculator",
+    name: "Token Fees",
     path: "/calculate-fees",
   },
   {
@@ -29,21 +30,23 @@ const Header = () => {
 
   return (
     <div className="fixed flex justify-between items-center left-0 top-0 p-8 w-full z-50">
-      <div>
-        {scrollY > 172 ? (
-          <img
-            src={RouterLogo}
-            className="h-12 w-40 object-contain"
-            alt="logo"
-          />
-        ) : (
-          <img
-            src={RouterFullLogo}
-            className="h-12 w-40 object-contain"
-            alt="logo"
-          />
-        )}
-      </div>
+      <Link to="/">
+        <div>
+          {scrollY > 172 ? (
+            <img
+              src={RouterLogo}
+              className="h-12 w-40 object-contain rotate-animation"
+              alt="logo"
+            />
+          ) : (
+            <img
+              src={RouterFullLogo}
+              className="h-12 w-40 object-contain"
+              alt="logo"
+            />
+          )}
+        </div>
+      </Link>
 
       <div className="text-white hidden xl:flex justify-between items-center xl:w-[75%] 2xl:w-[60%] bg-glass p-5 rounded-full text-2xl">
         {navLinks.map((val) => (

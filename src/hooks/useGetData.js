@@ -15,7 +15,7 @@ export const useGetMetaData = () => {
   return useQuery(["metaData"], () => getMetaData());
 };
 
-const getGenericMetaData = async (url) => {
+const getGenericMetaData = async () => {
   const res = await axios
     .get("https://api.stats.routerprotocol.com/api/generic/getMetaDataGeneric")
     .then((res) => res.data);
@@ -25,4 +25,20 @@ const getGenericMetaData = async (url) => {
 
 export const useGetGenericMetaData = () => {
   return useQuery(["genericMetaData"], () => getGenericMetaData());
+};
+
+const getFees = async (params) => {
+  const res = await axios
+    .get("https://api.stats.routerprotocol.com/api/fee", { params })
+    .then((res) => res.data);
+
+  return res;
+};
+
+export const useGetFees = (parameters) => {
+  return useQuery(["txFees"], () => getFees(parameters), {
+    enabled: false,
+    refetchOnWindowFocus: false,
+    staleTime: 0,
+  });
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Burger, Menu } from "@mantine/core";
 import NavLink from "./NavLink";
+import { useClickOutside } from "@mantine/hooks";
 
 const navLinks = [
   {
@@ -23,10 +24,11 @@ const navLinks = [
 
 const NavMenu = () => {
   const [opened, setOpened] = useState(false);
+  const ref = useClickOutside(() => setOpened(false));
 
   const classNames = {
     dropdown: "bg-glass border-0 h-48 w-96",
-    item: "text-white text-base hover:text-black"
+    item: "text-white text-base hover:text-black",
   };
 
   return (
@@ -36,13 +38,14 @@ const NavMenu = () => {
           color="white"
           opened={opened}
           onClick={() => setOpened((o) => !o)}
+          ref={ref}
         />
       </Menu.Target>
 
       <Menu.Dropdown>
         {navLinks.map((val) => (
-          <Menu.Item>
-            <NavLink key={val.path} name={val.name} path={val.path} />
+          <Menu.Item key={val.path}>
+            <NavLink name={val.name} path={val.path} />
           </Menu.Item>
         ))}
       </Menu.Dropdown>

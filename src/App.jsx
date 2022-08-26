@@ -1,7 +1,6 @@
 import {
   Routes,
   Route,
-  Link,
   BrowserRouter as Router,
   Navigate,
 } from "react-router-dom";
@@ -9,6 +8,7 @@ import CrossChainSwap from "./components/Cross-chain-swap/CrossChainSwap";
 import Header from "./components/Header";
 import Wallpaper from "./assets/wrapper.png";
 import CrossTalk from "./components/CrossTalk/CrossTalk";
+import FeeCalculator from "./components/feeCalculator/FeeCalculator";
 
 function App() {
   return (
@@ -25,10 +25,10 @@ function App() {
         <Route exact path="/" element={<Navigate to="/crosschainswap" />} />
         <Route exact path="crosschainswap" element={<CrossChainSwap />} />
         <Route exact path="crosstalk" element={<CrossTalk />} />
-        {/* <Route exact path="tx/:id" element={Hero} />
-        <Route exact path="calculate-fees" element={Hero} />
-        <Route exact path="verify-transaction" element={Hero} />
-        <Route path="*" component={PageNotFound} /> */}
+        {/* <Route exact path="tx/:id" element={Hero} /> */}
+        <Route exact path="calculate-fees" element={<FeeCalculator />} />
+        {/* <Route exact path="verify-transaction" element={Hero} /> */}
+        {/* <Route path="*" component={PageNotFound} /> */}
       </Routes>
     </Router>
   );
