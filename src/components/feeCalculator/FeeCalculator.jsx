@@ -46,6 +46,13 @@ const FeeCalculator = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    return () => {
+      setFeesData([]);
+      remove();
+    };
+  }, []);
+
   const changeSourceChain = (val) => {
     const option = chainLogos.find((item) => item.value === val);
     setSourceChain(option);
@@ -73,7 +80,7 @@ const FeeCalculator = () => {
   return (
     <div className="min-h-screen h-full bg-transparent mt-44 p-10 flex flex-col items-center text-white">
       {/* Meta data cards */}
-      <section className="flex flex-col justify-center items-center bg-glass p-4 h-[25rem] w-full xl:w-[50%] rounded-3xl">
+      <section className="flex flex-col justify-center items-center bg-glass p-8 h-[25rem] w-full xl:w-[50%] rounded-3xl">
         {/* source */}
         <div className="p-5 rounded-xl flex flex-col md:flex-row justify-center items-center w-full h-28 xl:h-24 md:h-16">
           <h2 className="text-gradient text-3xl font-bold mr-4 mb-3 md:mb-0">

@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Wallpaper from "./assets/wrapper.png";
 import CrossTalk from "./components/CrossTalk/CrossTalk";
 import FeeCalculator from "./components/feeCalculator/FeeCalculator";
+import VerifyTransaction from "./components/verifyTransaction/VerifyTransaction";
 
 function App() {
   return (
@@ -27,7 +28,11 @@ function App() {
         <Route exact path="crosstalk" element={<CrossTalk />} />
         {/* <Route exact path="tx/:id" element={Hero} /> */}
         <Route exact path="calculate-fees" element={<FeeCalculator />} />
-        {/* <Route exact path="verify-transaction" element={Hero} /> */}
+        <Route
+          exact
+          path="verify-transaction"
+          element={<VerifyTransaction />}
+        />
         {/* <Route path="*" component={PageNotFound} /> */}
       </Routes>
     </Router>

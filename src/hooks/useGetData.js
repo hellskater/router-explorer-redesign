@@ -42,3 +42,19 @@ export const useGetFees = (parameters) => {
     staleTime: 0,
   });
 };
+
+const verifyTransaction = async (params) => {
+  const res = await axios
+    .get("https://api.stats.routerprotocol.com/api/status", { params })
+    .then((res) => res.data);
+
+  return res;
+};
+
+export const useVerifyTransaction = (parameters) => {
+  return useQuery(["verifyTransaction"], () => verifyTransaction(parameters), {
+    enabled: false,
+    refetchOnWindowFocus: false,
+    staleTime: 0,
+  });
+};

@@ -29,7 +29,7 @@ const Header = () => {
   const scrollY = useScrollPosition();
 
   return (
-    <div className="fixed flex justify-between items-center left-0 top-0 p-8 w-full z-50">
+    <div className="fixed flex justify-between items-center left-0 top-0 p-8 w-full z-[60]">
       <Link to="/">
         <div>
           {scrollY > 172 ? (
