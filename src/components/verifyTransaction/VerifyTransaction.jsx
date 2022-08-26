@@ -109,12 +109,12 @@ const VerifyTransaction = () => {
       {isFetched && data && txData && (
         <section className="h-full mt-16 z-50 w-full flex justify-center items-center flex-col xl:w-[50%]">
           {data.tx_status === "Pending" ? (
-            <div className="text-white text-3xl lg:text-5xl flex items-center">
+            <div className="text-white text-2xl lg:text-5xl flex items-center">
               <MdPending className="text-5xl lg:text-8xl mr-3 text-orange-500" />
               <p>Transaction pending</p>
             </div>
           ) : (
-            <div className="text-white text-3xl lg:text-5xl flex items-center">
+            <div className="text-white text-2xl lg:text-4xl flex items-center">
               <FaCheckCircle className="text-green-500 text-5xl lg:text-8xl mr-3" />
               <p>Transaction Successful</p>
             </div>
