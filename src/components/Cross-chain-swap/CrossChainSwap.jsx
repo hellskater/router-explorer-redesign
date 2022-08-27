@@ -4,7 +4,7 @@ import StatCard from "../StatCard/StatCard";
 import { VscSearch } from "react-icons/vsc";
 import { FiX } from "react-icons/fi";
 import TransactionCard from "../transactionCard/TransactionCard";
-import { Loader } from "@mantine/core";
+import { Loader, Skeleton } from "@mantine/core";
 
 const CrossChainSwap = () => {
   const { data, isLoading, isSuccess } = useGetMetaData();
@@ -72,18 +72,34 @@ const CrossChainSwap = () => {
       return filteredArray.map((tx) => (
         <TransactionCard key={tx.id} data={tx} />
       ));
-    }
+    } else
+      return (
+        <div className="min-h-screen flex flex-col items-center w-full">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((val) => (
+            <div className="h-56 flex justify-center items-center">
+              <Loader size={150} variant="dots" color="white" />
+            </div>
+          ))}
+        </div>
+      );
   };
 
   return (
     <div className="min-h-screen h-full bg-transparent mt-44 p-10 flex flex-col items-center text-white">
       {/* Meta data cards */}
       <section className="flex flex-wrap justify-around items-center w-full">
-        {isSuccess &&
-          !isLoading &&
-          data.map(({ label, value }) => (
-            <StatCard key={label} label={label} value={value} />
-          ))}
+        {isSuccess && !isLoading
+          ? data.map(({ label, value }) => (
+              <StatCard key={label} label={label} value={value} />
+            ))
+          : [1, 2, 3, 4].map((val) => (
+              <Loader
+                size={100}
+                variant="dots"
+                color="white"
+                className="z-50"
+              />
+            ))}
       </section>
       <section className="z-50 w-full mt-20 flex justify-center flex-col items-center">
         <div className="w-full xl:w-[65%] 2xl:w-[60%] flex items-center rounded-xl text-white 2xl:h-14 h-12 text-lg p-4 border-[0.6px] border-gray-200">
