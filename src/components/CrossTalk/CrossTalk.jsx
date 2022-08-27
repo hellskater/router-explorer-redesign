@@ -89,7 +89,7 @@ const CrossTalk = () => {
   };
 
   return (
-    <div className="min-h-screen h-full bg-transparent mt-44 p-10 flex flex-col items-center text-white">
+    <div className="min-h-screen h-full bg-transparent mt-44 p-10 flex flex-col items-center text-white overflow-x-hidden">
       {/* Meta data cards */}
       <section className="flex flex-wrap justify-around items-center w-full">
         {isSuccess && !isLoading
