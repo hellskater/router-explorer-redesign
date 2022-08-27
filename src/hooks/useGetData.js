@@ -126,3 +126,17 @@ const getGenericTransactionData = async (param) => {
 export const useGetGenericTransactionData = (param) => {
   return useQuery(["txGenericData"], () => getGenericTransactionData(param));
 };
+
+const getTransactionChartData = async (days = 30) => {
+  const res = await axios
+    .get(
+      `https://api.stats.routerprotocol.com/api/aggregated/byday?days=${days}`
+    )
+    .then((res) => res.data);
+
+  return res.data;
+};
+
+export const useGetTransactionChartData = (days, key) => {
+  return useQuery(["txChartData", key], () => getTransactionChartData(days));
+};

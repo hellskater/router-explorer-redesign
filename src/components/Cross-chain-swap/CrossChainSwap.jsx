@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import { useGetMetaData, useGetTransactions } from "../../hooks/useGetData";
+import {
+  useGetMetaData,
+  useGetTransactionChartData,
+  useGetTransactions,
+} from "../../hooks/useGetData";
 import StatCard from "../StatCard/StatCard";
 import { VscSearch } from "react-icons/vsc";
 import { FiX } from "react-icons/fi";
 import TransactionCard from "../transactionCard/TransactionCard";
 import { Loader, Skeleton } from "@mantine/core";
+import TransactionChart from "../charts/TransactionChart";
+import VolumeChart from "../charts/VolumeChart";
 
 const CrossChainSwap = () => {
   const { data, isLoading, isSuccess } = useGetMetaData();
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [chartTransactions, setChartTransactions] = useState(0);
+  const [chartVolume, setChartVolume] = useState(0);
+  const [transactionDuration, setTransactionDuration] = useState("30");
+  const [volumeDuration, setVolumeDuration] = useState("30");
+
   const {
     status,
     data: txData,
@@ -100,6 +111,68 @@ const CrossChainSwap = () => {
                 className="z-50"
               />
             ))}
+      </section>
+      <section className="xl:flex justify-center gap-10 h-96 items-center w-full m-14 p-4 hidden">
+        <div className="h-full w-full flex flex-col relative">
+          <div className="absolute left-3 top-5 text-white text-2xl flex flex-col justify-center items-center">
+            <p className="text-2xl mb-3">Transactions</p>
+            <p>{chartTransactions}</p>
+          </div>
+          <TransactionChart
+            days={transactionDuration}
+            setChartTransactions={(val) => setChartTransactions(val)}
+          />
+          <div className="absolute right-6 top-5 text-white text-xl flex flex-col gap-3 justify-center items-center z-50 cursor-pointer">
+            <p
+              className={transactionDuration === "7" && "text-gradient"}
+              onClick={() => setTransactionDuration("7")}
+            >
+              7d
+            </p>
+            <p
+              className={transactionDuration === "14" && "text-gradient"}
+              onClick={() => setTransactionDuration("14")}
+            >
+              14d
+            </p>
+            <p
+              className={transactionDuration === "30" && "text-gradient"}
+              onClick={() => setTransactionDuration("30")}
+            >
+              30d
+            </p>
+          </div>
+        </div>
+        <div className="h-full w-full flex flex-col relative">
+          <div className="absolute left-3 top-5 text-white text-2xl flex flex-col justify-center items-center">
+            <p className="text-2xl mb-3">Volume</p>
+            <p>{chartVolume}</p>
+          </div>
+          <VolumeChart
+            days={volumeDuration}
+            setChartVolume={(val) => setChartVolume(val)}
+          />
+          <div className="absolute right-6 top-5 text-white text-xl flex flex-col gap-3 justify-center items-center z-50 cursor-pointer">
+            <p
+              className={volumeDuration === "7" && "text-gradient"}
+              onClick={() => setVolumeDuration("7")}
+            >
+              7d
+            </p>
+            <p
+              className={volumeDuration === "14" && "text-gradient"}
+              onClick={() => setVolumeDuration("14")}
+            >
+              14d
+            </p>
+            <p
+              className={volumeDuration === "30" && "text-gradient"}
+              onClick={() => setVolumeDuration("30")}
+            >
+              30d
+            </p>
+          </div>
+        </div>
       </section>
       <section className="z-50 w-full mt-20 flex justify-center flex-col items-center">
         <div className="w-full xl:w-[65%] 2xl:w-[60%] flex items-center rounded-xl text-white 2xl:h-14 h-12 text-lg p-4 border-[0.6px] border-gray-200">
