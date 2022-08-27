@@ -114,3 +114,15 @@ const getTransactionData = async (param) => {
 export const useGetTransactionData = (param) => {
   return useQuery(["txData"], () => getTransactionData(param));
 };
+
+const getGenericTransactionData = async (param) => {
+  const res = await axios
+    .get(`https://api.stats.routerprotocol.com/api/generic/search?q=${param}`)
+    .then((res) => res.data);
+
+  return res.data[0];
+};
+
+export const useGetGenericTransactionData = (param) => {
+  return useQuery(["txGenericData"], () => getGenericTransactionData(param));
+};

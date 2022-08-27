@@ -11,6 +11,7 @@ import CrossTalk from "./components/CrossTalk/CrossTalk";
 import FeeCalculator from "./components/feeCalculator/FeeCalculator";
 import VerifyTransaction from "./components/verifyTransaction/VerifyTransaction";
 import TransactionDetails from "./components/transactionDetails/TransactionDetails";
+import GenericTransactionDetails from "./components/transactionDetails/GenericTransactionDetails";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           path="crosschainswap/tx/:id"
           element={<TransactionDetails />}
         />
+        <Route exact path="crosstalk/tx/:id" element={<GenericTransactionDetails />} />
         <Route exact path="calculate-fees" element={<FeeCalculator />} />
         <Route
           exact

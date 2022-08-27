@@ -5,6 +5,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
 import { BsCheckCircle } from "react-icons/bs";
 import { useHover } from "@mantine/hooks";
+import { Link } from "react-router-dom";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -38,7 +39,7 @@ const GenericTransactionCard = ({ data }) => {
   };
 
   return (
-    <>
+    <Link to={`/crosstalk/tx/${deposit_tx_hash}`}>
       <div
         className="flex items-center w-full p-6 hover:bg-glass transition-all duration-100 cursor-pointer relative"
         ref={ref}
@@ -145,7 +146,7 @@ const GenericTransactionCard = ({ data }) => {
           <div className="border-b-[0.1px] border-gray-300 w-[90%]"></div>
         </div>
       )}
-    </>
+    </Link>
   );
 };
 
