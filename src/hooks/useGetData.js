@@ -1,6 +1,6 @@
 // Query to fetch the NFT details
 
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const getMetaData = async (url) => {
@@ -56,5 +56,27 @@ export const useVerifyTransaction = (parameters) => {
     enabled: false,
     refetchOnWindowFocus: false,
     staleTime: 0,
+  });
+};
+
+const getTransactions = async ({ pageParam = 1 }) => {
+  const res = await axios.get(
+    `https://api.stats.routerprotocol.com/api/deposits?networkId=137,56,43114,250,1,42161,10,1666600000,25&limit=11&orderBy=desc&page=${pageParam}`
+  );
+  const results = res.data;
+  return {
+    results,
+    nextPage: pageParam + 1,
+    totalPages: Math.floor(results?.total / 11),
+  };
+};
+
+export const useGetTransactions = () => {
+  return useInfiniteQuery(["transactions"], getTransactions, {
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.nextPage < lastPage.totalPages) return lastPage.nextPage;
+      return undefined;
+    },
+    // refetchInterval: 5000,
   });
 };

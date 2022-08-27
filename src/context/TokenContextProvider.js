@@ -28,8 +28,12 @@ function TokenContextProvider(props) {
       return axios.get(val);
     });
 
-    Promise.all(promiseList).then((dataArr) => {
-      dataArr.map((obj) => arr.push(obj.data.tokens));
+    Promise.allSettled(promiseList).then((dataArr) => {
+      dataArr.map((obj) => {
+        if (obj.status === "fulfilled") {
+          arr.push(obj.value.data.tokens);
+        }
+      });
       setTokenList(arr.flat());
     });
   }, []);
