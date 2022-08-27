@@ -1,5 +1,6 @@
 const TokenCard = ({ token }) => {
-  const { logo, symbol, exchangeFee, transferFee, isAccepted } = token;
+  const { logo, symbol, exchangeFee, transferFee, isAccepted, decimals } =
+    token;
 
   if (isAccepted)
     return (
@@ -15,11 +16,11 @@ const TokenCard = ({ token }) => {
         <div className="w-full flex items-center justify-between">
           <div>
             <p className="text-3xl">Transfer fee</p>
-            <p className="text-base">{transferFee}</p>
+            <p className="text-base">{transferFee / 10 ** decimals}</p>
           </div>
           <div>
             <p className="text-3xl">Exchange fee</p>
-            <p className="text-base">{exchangeFee}</p>
+            <p className="text-base">{exchangeFee / 10 ** decimals}</p>
           </div>
         </div>
       </div>

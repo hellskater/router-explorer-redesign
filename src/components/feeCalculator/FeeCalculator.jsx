@@ -19,6 +19,8 @@ const FeeCalculator = () => {
     destChainId: targetChain.value,
   });
 
+  console.log(tokenList);
+
   useEffect(() => {
     if (isFetched) {
       let arr = [];
@@ -36,6 +38,7 @@ const FeeCalculator = () => {
               exchangeFee: val.exchangeFee,
               transferFee: val.transferFee,
               isAccepted: val.isAccepted,
+              decimals: details.decimals,
             };
             arr.push(obj);
           }
