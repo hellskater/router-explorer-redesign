@@ -80,3 +80,25 @@ export const useGetTransactions = () => {
     // refetchInterval: 5000,
   });
 };
+
+const getGenericTransactions = async ({ pageParam = 1 }) => {
+  const res = await axios.get(
+    `https://api.stats.routerprotocol.com/api/deposits?networkId=137,56,43114,250,1,42161,10,1666600000,25&limit=11&orderBy=desc&isGeneric=true&page=${pageParam}`
+  );
+  const results = res.data;
+  return {
+    results,
+    nextPage: pageParam + 1,
+    totalPages: Math.floor(results?.total / 11),
+  };
+};
+
+export const useGetGenericTransactions = () => {
+  return useInfiniteQuery(["genericTransactions"], getGenericTransactions, {
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.nextPage < lastPage.totalPages) return lastPage.nextPage;
+      return undefined;
+    },
+    // refetchInterval: 5000,
+  });
+};
