@@ -10,12 +10,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol";
     letter-spacing: 1px;
   }
-
-  /* body {
-    background-image: url("./assets/wrapper.png");
-    background-size: 100% 100%;
-    overflow: hidden;
-  } */
 }
 
 @layer components {

@@ -102,3 +102,15 @@ export const useGetGenericTransactions = () => {
     // refetchInterval: 5000,
   });
 };
+
+const getTransactionData = async (param) => {
+  const res = await axios
+    .get(`https://api.stats.routerprotocol.com/api/search?q=${param}`)
+    .then((res) => res.data);
+
+  return res.data[0];
+};
+
+export const useGetTransactionData = (param) => {
+  return useQuery(["txData"], () => getTransactionData(param));
+};
