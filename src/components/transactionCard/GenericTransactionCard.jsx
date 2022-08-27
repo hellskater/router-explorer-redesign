@@ -2,6 +2,8 @@ import { chainLogos } from "../constants/chainLogos";
 import dayjs from "dayjs";
 import { VscFoldDown } from "react-icons/vsc";
 import { FiExternalLink } from "react-icons/fi";
+import { BiErrorCircle } from "react-icons/bi";
+import { BsCheckCircle } from "react-icons/bs";
 import { useHover } from "@mantine/hooks";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -14,6 +16,7 @@ const GenericTransactionCard = ({ data }) => {
     network_id,
     dest_network_id,
     user_address,
+    transaction_status,
   } = data;
 
   const { hovered, ref } = useHover();
@@ -37,7 +40,7 @@ const GenericTransactionCard = ({ data }) => {
   return (
     <>
       <div
-        className="flex items-center w-full p-6 hover:bg-glass transition-all duration-100 cursor-pointer "
+        className="flex items-center w-full p-6 hover:bg-glass transition-all duration-100 cursor-pointer relative"
         ref={ref}
       >
         <div className="flex items-center w-[75%] p-2 justify-between">
@@ -130,6 +133,11 @@ const GenericTransactionCard = ({ data }) => {
         <div className="flex flex-col justify-center items-center text-lg ml-4">
           {dayjs(created_date).fromNow()}
         </div>
+        {transaction_status === "Pending" ? (
+          <BiErrorCircle className="absolute text-4xl text-orange-500 top-4 right-4" />
+        ) : (
+          <BsCheckCircle className="absolute text-4xl text-green-500 top-4 right-4" />
+        )}
       </div>
 
       {!hovered && (
