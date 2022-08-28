@@ -6,7 +6,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
 import { BsCheckCircle } from "react-icons/bs";
 import { useHover } from "@mantine/hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useRoutes } from "react-router-dom";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -26,6 +26,8 @@ const TransactionCard = ({ data }) => {
   } = data;
 
   const tokenList = useTokenContext();
+
+  const navigate = useNavigate();
 
   const { hovered, ref } = useHover();
   const { hovered: srcLinkHovered, ref: ref1 } = useHover();
@@ -53,11 +55,18 @@ const TransactionCard = ({ data }) => {
     } else return input;
   };
 
+  const openTransactionDetailsPage = () => {
+    if (!srcLinkHovered && !destLinkHovered) {
+      navigate(`/crosschainswap/tx/${deposit_tx_hash}`);
+    }
+  };
+
   return (
-    <Link to={`/crosschainswap/tx/${deposit_tx_hash}`}>
+    <>
       <div
         className="flex items-center w-full p-6 hover:bg-glass transition-all duration-100 cursor-pointer relative"
         ref={ref}
+        onClick={openTransactionDetailsPage}
       >
         <div className="flex items-center w-[95%] md:w-[80%] p-2 justify-between">
           <div className="flex flex-col justify-center items-center">
@@ -188,7 +197,7 @@ const TransactionCard = ({ data }) => {
           <div className="border-b-[0.1px] border-gray-300 w-[90%]"></div>
         </div>
       )}
-    </Link>
+    </>
   );
 };
 
