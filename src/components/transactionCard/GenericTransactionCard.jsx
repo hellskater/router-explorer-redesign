@@ -44,7 +44,7 @@ const GenericTransactionCard = ({ data }) => {
         className="flex items-center w-full p-6 hover:bg-glass transition-all duration-100 cursor-pointer relative"
         ref={ref}
       >
-        <div className="flex items-center w-[75%] p-2 justify-between">
+        <div className="flex items-center w-[70%] md:w-[75%] p-2 justify-between">
           <div className="flex flex-col justify-center items-center">
             <div className="flex justify-center items-center">
               <img
@@ -131,7 +131,7 @@ const GenericTransactionCard = ({ data }) => {
 
         {/* Time */}
 
-        <div className="flex flex-col justify-center items-center text-lg ml-4">
+        <div className="hidden md:flex flex-col justify-center items-center text-lg ml-4">
           {dayjs(created_date).fromNow()}
         </div>
         {transaction_status === "Pending" ? (
