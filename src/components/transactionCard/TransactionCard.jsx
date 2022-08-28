@@ -6,7 +6,8 @@ import { FiExternalLink } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
 import { BsCheckCircle } from "react-icons/bs";
 import { useHover } from "@mantine/hooks";
-import { Link, useNavigate, useRoutes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import NoImage from "../../assets/noimage.webp";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -61,6 +62,11 @@ const TransactionCard = ({ data }) => {
     }
   };
 
+  const handleImageError = (e) => {
+    e.target.src = NoImage;
+    e.onerror = null;
+  };
+
   return (
     <>
       <div
@@ -73,8 +79,9 @@ const TransactionCard = ({ data }) => {
             <div className="flex justify-center items-center">
               <img
                 className="h-10 w-10 object-contain mr-3"
-                src={srcNetworkData?.icon}
+                src={srcNetworkData?.icon || NoImage}
                 alt="chain logo"
+                onError={(e) => handleImageError(e)}
               />
 
               <div className="hidden lg:block">
@@ -86,8 +93,9 @@ const TransactionCard = ({ data }) => {
             <div className="flex justify-center items-center">
               <img
                 className="h-10 w-10 object-contain mr-3"
-                src={destNetworkData?.icon}
+                src={destNetworkData?.icon || NoImage}
                 alt="chain logo"
+                onError={(e) => handleImageError(e)}
               />
               <div className="hidden lg:block">
                 <p className="text-xl">{destNetworkData?.label}</p>
@@ -100,8 +108,9 @@ const TransactionCard = ({ data }) => {
             <div className="flex justify-center items-center">
               <img
                 className="h-10 w-10 object-contain mr-3"
-                src={srcTokenData?.logoURI}
+                src={srcTokenData?.logoURI || NoImage}
                 alt="token logo"
+                onError={(e) => handleImageError(e)}
               />
               <div className="hidden lg:block">
                 <p className="text-xl">{srcTokenData?.symbol}</p>
@@ -112,8 +121,9 @@ const TransactionCard = ({ data }) => {
             <div className="flex justify-center items-center">
               <img
                 className="h-10 w-10 object-contain mr-3"
-                src={destTokenData?.logoURI}
+                src={destTokenData?.logoURI || NoImage}
                 alt="token logo"
+                onError={(e) => handleImageError(e)}
               />
 
               <div className="hidden lg:block">
@@ -131,8 +141,9 @@ const TransactionCard = ({ data }) => {
               <div className="flex justify-center items-center">
                 <img
                   className="h-10 w-10 object-contain mr-3"
-                  src={srcNetworkData?.scanIcon}
+                  src={srcNetworkData?.scanIcon || NoImage}
                   alt="network logo"
+                  onError={(e) => handleImageError(e)}
                 />
                 <div ref={ref1} className="hidden lg:block">
                   <p className={`text-xl`}>{srcNetworkData?.scanName}</p>
@@ -159,8 +170,9 @@ const TransactionCard = ({ data }) => {
               <div className="flex justify-center items-center">
                 <img
                   className="h-10 w-10 object-contain mr-3"
-                  src={destNetworkData?.scanIcon}
+                  src={destNetworkData?.scanIcon || NoImage}
                   alt="network logo"
+                  onError={(e) => handleImageError(e)}
                 />
                 <div ref={ref2} className="hidden lg:block">
                   <p className={`text-xl`}>{destNetworkData?.scanName}</p>
