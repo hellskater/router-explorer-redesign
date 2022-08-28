@@ -7,6 +7,7 @@ import { useClipboard } from "@mantine/hooks";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
+import NoImage from "../../assets/noimage.webp";
 import { MdContentCopy } from "react-icons/md";
 
 const TransactionDetails = () => {
@@ -48,14 +49,20 @@ const TransactionDetails = () => {
     } else return input;
   };
 
+  const handleImageError = (e) => {
+    e.target.src = NoImage;
+    e.onerror = null;
+  };
+
   return (
     <div className="min-h-screen h-full bg-transparent mt-44 p-10 flex flex-col items-center justify-center w-full text-white overflow-x-hidden">
       <section className="hidden lg:flex z-50 justify-between items-center w-[60%]">
         <div className="flex flex-col items-center justify-center">
           <img
-            src={srcNetworkData?.icon}
+            src={srcNetworkData?.icon || NoImage}
             className="h-48 w-48 object-contain"
             alt="network logo"
+            onError={(e) => handleImageError(e)}
           />
           <p className="text-4xl">{srcNetworkData?.label}</p>
         </div>
@@ -63,9 +70,10 @@ const TransactionDetails = () => {
         <AiOutlineDoubleRight size={150} />
         <div className="flex flex-col items-center justify-center gap-4">
           <img
-            src={destNetworkData?.icon}
+            src={destNetworkData?.icon || NoImage}
             className="h-48 w-48 object-contain"
             alt="network logo"
+            onError={(e) => handleImageError(e)}
           />
           <p className="text-4xl">{destNetworkData?.label}</p>
         </div>
@@ -84,9 +92,10 @@ const TransactionDetails = () => {
           <p className="lg:w-3/12">From</p>
           <div className="flex items-center lg:border-l-[0.2px] border-gray-300 pl-8 text-sm lg:text-lg">
             <img
-              src={srcNetworkData?.icon}
+              src={srcNetworkData?.icon || NoImage}
               className="h-10 w-10 object-contain mr-3"
               alt="network logo"
+              onError={(e) => handleImageError(e)}
             />
             <p className="hidden lg:block">{data?.depositor_address}</p>
             <p className="lg:hidden">{truncate(data?.depositor_address)}</p>
@@ -104,9 +113,10 @@ const TransactionDetails = () => {
           <p className="lg:w-3/12">To</p>
           <div className="flex items-center lg:border-l-[0.2px] border-gray-300 pl-8 text-sm lg:text-lg">
             <img
-              src={destNetworkData?.icon}
+              src={destNetworkData?.icon || NoImage}
               className="h-10 w-10 object-contain mr-3"
               alt="network logo"
+              onError={(e) => handleImageError(e)}
             />
             <p className="hidden lg:block">
               {data?.destination_receipient_address}
@@ -130,9 +140,10 @@ const TransactionDetails = () => {
           <p className="lg:w-3/12">Source Token</p>
           <div className="flex items-center lg:border-l-[0.2px] border-gray-300 pl-8 text-sm lg:text-lg mt-2 lg:mt-0">
             <img
-              src={srcTokenData?.logoURI}
+              src={srcTokenData?.logoURI || NoImage}
               className="h-10 w-10 object-contain mr-3"
               alt="network logo"
+              onError={(e) => handleImageError(e)}
             />
             <p>{data?.srctokensymbol}</p>
             {clipboard3.copied ? (
@@ -155,9 +166,10 @@ const TransactionDetails = () => {
           <p className="lg:w-3/12">Destination Token</p>
           <div className="flex items-center lg:border-l-[0.2px] border-gray-300 pl-8 text-sm lg:text-lg mt-2 lg:mt-0">
             <img
-              src={destTokenData?.logoURI}
+              src={destTokenData?.logoURI || NoImage}
               className="h-10 w-10 object-contain mr-3"
               alt="network logo"
+              onError={(e) => handleImageError(e)}
             />
             <p>{data?.destinationtokensymbol}</p>
             {clipboard4.copied ? (
@@ -180,9 +192,10 @@ const TransactionDetails = () => {
           <p className="lg:w-3/12">Fee Token</p>
           <div className="flex items-center lg:border-l-[0.2px] border-gray-300 pl-8 text-sm lg:text-lg">
             <img
-              src={feeTokenData?.logoURI}
+              src={feeTokenData?.logoURI || NoImage}
               className="h-10 w-10 object-contain mr-3"
               alt="token logo"
+              onError={(e) => handleImageError(e)}
             />
             <p>{data?.feetokensymbol}</p>
           </div>
